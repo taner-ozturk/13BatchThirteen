@@ -7,10 +7,7 @@ public class SoqlDemo {
       account acc = [select id, name, Phone from account order by createddate desc limit 1];
       system.debug('account record ' + acc);
      }
-      public static void accountSOQL_12(){
-      account acc = [select id, name, Phone from account order by createddate desc limit 1];
-      system.debug('account record ' + acc);
-     }
+
      public static void accountSOQL_2(){
           account acc = [select id, name, Phone, AccountNumber, Website from account order by createddate desc limit 1];
           system.debug('latest created account record ' + acc);
