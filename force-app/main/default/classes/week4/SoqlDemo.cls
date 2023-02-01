@@ -74,6 +74,7 @@ public class SoqlDemo {
        for (salesforce_project__c eachSP : listSP) {
             //get all tickets of each project in List<salesforce_ticket__c>
             list<salesforce_ticket__c> listST = eachSP.salesforce_tickets__r;
+            //Merhaba Tr ekibi
             
             //total number of tickets by using .size() method of list. 
                  //==> 1st requirement is Satisfied.
