@@ -1,0 +1,19 @@
+SELECT Id, Name FROM Account
+SELECT Name, Id, Type, BillingCity FROM Account
+SELECT Id, Name, Mailingcity FROM Contact WHERE Name LIKE '%a'
+SELECT Id, Name, Mailingcity FROM Contact WHERE Name LIKE '%a%'
+SELECT Id, Name, Type, BillingCity FROM Account ORDER BY Name DESC
+SELECT Id, Name, Type, BillingCity, CreatedDate FROM Account ORDER BY CreatedDate DESC
+SELECT Id, Name, Type, BillingCity, CreatedDate FROM Account ORDER BY CreatedDate DESC LIMIT 5
+SELECT Id, Name, Industry FROM Account WHERE Industry = 'energy' LIMIT 1
+SELECT Id, Name, Industry,Phone FROM account WHERE Phone !=''
+SELECT Id, Name, Project_Name__c, Status__c FROM Salesforce_Project__c WHERE Status__c != 'new'
+SELECT Id, Name, Industry, Phone, AccountNumber FROM account WHERE (Phone !='' OR website !='') AND AccountNumber!=null
+SELECT Id, Name, Industry, Phone, AccountNumber, AnnualRevenue FROM Account WHERE AnnualRevenue > 100000
+
+SELECT Id, Name, Industry, Phone, AccountNumber, AnnualRevenue FROM Account WHERE CreatedDate > LAST_WEEK
+SELECT Id, Name, Industry, Phone, AccountNumber, AnnualRevenue FROM Account WHERE CreatedDate = LAST_N_DAYS:365
+
+SELECT Id, Name, Mailingcity FROM Contact WHERE Mailingcity = 'paris' or Mailingcity = 'lawrence' or Mailingcity = 'burlington'
+SELECT Id, Name, Mailingcity FROM Contact WHERE Mailingcity IN ('paris','lawrence','burlington')
+SELECT Id, Name, Mailingcity FROM Contact WHERE Mailingcity NOT IN ('paris','lawrence','burlington')
