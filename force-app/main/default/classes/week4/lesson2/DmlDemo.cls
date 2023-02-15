@@ -7,6 +7,9 @@ public class DmlDemo {
 
         //insert dml to create records
         insert acc;
+        acc.name = 'Softinnovas Inc';
+        update acc;
+        
         system.debug(acc);
     }
 
@@ -34,12 +37,10 @@ public class DmlDemo {
         update ac;
         system.debug('after updating ' + ac);
     }
-    //master
 
-    //test
     public static void dmlUpdateDemo_stndObj3() {
         //1. get record from org
-        account acc = [select id, name from account where name = 'softinnovas' limit 1];
+        account acc = [select id, name from account where name = 'softinnovas' limit 1 ];
 
         //update name
         acc.Name = 'SoftInnovas Inc.';
@@ -47,4 +48,186 @@ public class DmlDemo {
         //update dml
         update acc;
     }
+
+    //creating related contact record of a particular account
+    public static void dmlInsertDemo_stndObj2() {
+        //fetch account record
+        account ac = [select id, name from account where name like 'Softinnovas%' limit 1];
+        //create contat instance
+        contact c = new contact();
+        c.LastName = 'Biden';
+        //related field id
+        c.AccountId = ac.Id;
+        //create contact record
+        insert c;
+    }
+
+    public static void dmlInsertDemo_cstmObj2() {
+    
+        Salesforce_Project__c sp = [select id, name from Salesforce_Project__c ORDER BY CreatedDate desc limit 1];
+        
+        
+        //create ticket
+        Salesforce_Ticket__c newST = new Salesforce_Ticket__c();
+        
+        newST.Subject__c = 'farklı record type';
+        newST.Priority__c = 'High';
+        newST.Requested_by_date__c = date.today();
+        newST.Status__c = 'New';
+        
+        //relationship field
+        newST.Salesforce_Project__c = sp.Id;
+        insert newST;
+    }
+
+    public static void dmlInsertDemo_wrong1() {
+        for (Integer i = 0; i < 155; i++) {
+             //create instance of sobject
+            account acc = new account(); //similar to clicking new button
+            //set field names
+            acc.Name = 'softinnovas' + i;
+
+            //insert dml to create records
+            insert acc;
+        }
+    }
+    public static void dmlMultipleRecordInsert_right1() {
+        List<account> listAcc = new list<account>();
+        account acc1 = new account();
+        acc1.Name = 'bulk acc1';
+        listAcc.add(acc1);
+
+        account acc2 = new account();
+        acc2.Name = 'bulk acc2';
+        listAcc.add(acc2);
+
+        account acc3 = new account();
+        acc3.Name = 'bulk acc3';
+        listAcc.add(acc3);
+
+        insert listAcc;
+    }
+
+    public static void dmlMultipleRecordInsert_right2() {
+        List<account> listAcc = new list<account>();
+        for (Integer i = 0; i < 160; i++) {
+            account acc = new account();
+            acc.Name = 'Softinnovas v'+i;
+            acc.Phone = '98765412'+i;
+            acc.AccountNumber = 'ACS ' + i;
+            acc.Active__c = 'Yes';
+            listAcc.add(acc);
+        }
+        //execute insert DML only if listACC is NOT EMPTY.
+            // isEmpty() -> true when no record. 
+            // isEmpty() -> false when records are present in list 
+        if (!listAcc.isEmpty()) {
+            insert listAcc;
+        }
+    }
+
+    public static void dmlMultipleRecordUpdate_right1() {
+        List<account> listAccount = [select id, name from account order by createddate desc limit 40];
+
+        //append b.0 in accounts
+        for (account acc : listAccount) {
+            acc.Name = acc.Name + ' TR E';
+        }
+
+        update listAccount;
+    }
+
+    //update account name 
+        //append Yy --> if active is Yes
+        //append Nn --> if active is null
+    public static void dmlMultipleRecordUpdate_right2() {
+        list<account> listAccount = [select id, name, Active__c from account order by createddate desc limit 20];
+
+        list<account> updateAccount = new list<account>();
+        //System.SObjectException: SObject row was retrieved via SOQL without querying the requested field: Account.Active__c
+        for (account eachAcc : listAccount) {
+            if (eachAcc.Active__c == 'Yes') {
+                eachAcc.Name += ' Yy';
+                updateAccount.add(eachAcc);
+            }
+        }
+        if (!updateAccount.isEmpty()) {
+            update updateAccount;
+        }
+    }
+
+    public static void deleteLastRecords() {
+        list<account> listAccount = [select id from account where createdDate = today];
+
+            delete listAccount;
+        
+    }
+
+    public static void bulkDmlRecord(){
+        list<Salesforce_Project__c> projects = new  list<Salesforce_Project__c>();
+        for (Integer i = 1; i <= 30; i++) {
+            Salesforce_Project__c sp = new Salesforce_Project__c();
+            sp.Project_Name__c = 'Project ' + i;
+            if (i <= 10) {
+                sp.Status__c = 'New';
+            } else if (i <= 20) {
+                sp.Status__c = 'In - progress';
+            } else {
+                sp.Status__c = 'Completed';
+            }
+            projects.add(sp);
+        }
+        insert projects;
+
+        List<Salesforce_Ticket__c> tickets = new List<Salesforce_Ticket__c>();
+        
+        integer T = 1;
+        for (Salesforce_Project__c sp : projects) {
+            Salesforce_Ticket__c st1 = new Salesforce_Ticket__c();
+            st1.Subject__c = 'Ticket ' + T;
+            st1.Priority__c = 'High';
+            st1.Salesforce_Project__c = sp.Id;
+            Salesforce_Ticket__c st2 = new Salesforce_Ticket__c();
+            T++;
+            st2.Subject__c = 'Ticket ' + T;
+            st2.Priority__c = 'Medium';
+            st2.Salesforce_Project__c = sp.Id;
+            Salesforce_Ticket__c st3 = new Salesforce_Ticket__c();
+            T++;
+            st3.Subject__c = 'Ticket ' + T;
+            st3.Priority__c = 'Low';
+            st3.Salesforce_Project__c = sp.Id;
+            T++;
+
+            tickets.add(st1);
+            tickets.add(st2);
+            tickets.add(st3);
+        }
+        insert tickets;
+    }
+
+    public static void recordTypeExample(){
+        
+        Salesforce_Project__c sp = [select id, name from Salesforce_Project__c ORDER BY CreatedDate desc limit 1];
+      
+        //Tüm record typeları getirmek için. Buradan getirilip for ile dönülebilir.
+        //list<RecordType> ticketRt = [SELECT id FROM RecordType WHERE SobjectType='Salesforce_Ticket__c'];
+      
+        //direkt isme bağlı recordtype getirmek için
+        Id devRecordTypeId = Schema.SObjectType.Salesforce_Ticket__c.getRecordTypeInfosByName().get('Bug').getRecordTypeId();
+ 
+        //create ticket
+        Salesforce_Ticket__c newST = new Salesforce_Ticket__c();
+        newST.RecordTypeId = devRecordTypeId;
+        newST.Subject__c = 'farklı record type';
+        newST.Priority__c = 'High';
+        newST.Requested_by_date__c = date.today();
+        newST.Status__c = 'New';
+        
+        //relationship field
+        newST.Salesforce_Project__c = sp.Id;
+        insert newST;
+
+    }
+
 }
