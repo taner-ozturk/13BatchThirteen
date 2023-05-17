@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Prepare_Callout_Request</name>
+        <label>Prepare Callout Request</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <actionName>GetExchangeRates.Get Exchange Rate Action</actionName>
+        <actionType>externalService</actionType>
+        <connector>
+            <targetReference>Display_Screen</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>api_key</name>
+            <value>
+                <stringValue>291b6905138a4f999a9de9c50dff878f</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>base</name>
+            <value>
+                <stringValue>USD</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>target</name>
+            <value>
+                <stringValue>EUR,CAD,INR,TRY</stringValue>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>20 Callout Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>20 Callout Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Display_Screen</name>
+        <label>Display Screen</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>EchangeRates</name>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;color: rgb(4, 46, 234);&quot;&gt;&lt;em&gt;Exchange Rates Information;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(11, 128, 224);&quot;&gt;Base Currency: {!Prepare_Callout_Request.2XX.base}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(11, 128, 224);&quot;&gt;EUR : {!Prepare_Callout_Request.2XX.exchangex5frates.EUR}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(11, 128, 224);&quot;&gt;CAD : {!Prepare_Callout_Request.2XX.exchangex5frates.CAD}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(11, 128, 224);&quot;&gt;INR : {!Prepare_Callout_Request.2XX.exchangex5frates.INR}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(11, 128, 224);&quot;&gt;TRY : {!Prepare_Callout_Request.2XX.exchangex5frates.z0TRY}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Prepare_Callout_Request</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+</Flow>

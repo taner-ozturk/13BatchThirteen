@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Wire Apex - Datatable">
+        <div class="slds-var-m-around_medium">
+            <!--As a Property-->
+            <b>Wire as Property Datatable</b><br/>
+            <lightning-datatable
+            key-field="id"
+            columns={columns}
+            data={accounts.data}></lightning-datatable> <br/>
+            <!--As a Function-->
+            <b>Wire as Function Datatable</b> <br/>
+            <lightning-datatable
+            key-field="id"
+            columns={columns}
+            data={accountValues}></lightning-datatable>
+
+
+        </div>
+    </lightning-card>
+    
+</template>

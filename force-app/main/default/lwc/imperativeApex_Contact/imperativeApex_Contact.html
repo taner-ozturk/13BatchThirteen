@@ -1,0 +1,19 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card title ="imperative apex - Contact">
+        <div class="slds-var-m-around_medium">
+            <lightning-button 
+                label="Show Contacts" 
+                variant="Brand" 
+                onclick={contactHandler}> <br/>
+            </lightning-button>
+            <template lwc:if={contacts}>
+                <lightning-datatable
+                    key-field="id"
+                    columns={columns}
+                    data={contacts}>
+                </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>    
+</template>
