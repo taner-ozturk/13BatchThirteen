@@ -10,7 +10,7 @@ import PHONE_FIELD from '@salesforce/schema/Case.ContactPhone';*/
 
 export default class GetRecord_Case extends LightningElement {
 
-    recordId = '5005i00000SATUHAA5';
+    recordId = '500Dn000008UrXdIAK';
 
     @wire(getRecord,{recordId :'$recordId', layoutTypes : ['Full'], mode : ['View'] })
     caseRecord;

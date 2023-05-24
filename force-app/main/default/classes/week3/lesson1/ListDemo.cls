@@ -59,10 +59,6 @@ public class ListDemo {
     }
 
     public static void iterateListInteger() {
-
-
-        List<integer> listInteger = new List<integer>{10,15,21,15,15,13};
-
         List<integer> listInteger = new List<integer>();
         listInteger.add(10);//0
         listInteger.add(15);//1

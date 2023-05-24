@@ -1,10 +1,10 @@
 //Endpoint : https://batch-13-dev-ed.develop.my.salesforce.com/services/apexrest/Case/
-@RestResource(urlMapping = '/Case/*')
+@RestResource(urlMapping = '/Mahmut/*')
 global with sharing class CaseManager {
     
     /**
         *  This method is exposing Case record by their Salesforce Id
-        * Endpoint : https://batch-13-dev-ed.develop.my.salesforce.com/services/apexrest/Case/5008d00000Jey96AAB&5008d00000Jey96AAB
+        * Endpoint : https://batch-13-dev-ed.develop.my.salesforce.com/services/apexrest/Case/5008d00000Jey96AAB
         * Http Method : GET
     */
     @HttpGet
@@ -12,10 +12,9 @@ global with sharing class CaseManager {
         //grab the caseId from the end of the URL
         RestRequest request = RestContext.request;
         String uri = request.requestURI;
-        //kimler hangi saatte request te bulundu.
-        Integer lastIndex = uri.lastIndexOf('/'); //to find the index of last "/" character
-        Id caseIds = uri.substring(lastIndex+1);
 
+        Integer lastIndex = uri.lastIndexOf('/'); //to find the index of last "/" character
+        Id caseId = uri.substring(lastIndex+1);
 
         Case cs = [SELECT Id, CaseNumber, Subject, Description, Type, Priority
                    FROM Case

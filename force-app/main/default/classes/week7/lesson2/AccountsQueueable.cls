@@ -12,6 +12,4 @@ public class AccountsQueueable implements Queueable{
         }
         update allAccounts;
     }
-
-    
 }

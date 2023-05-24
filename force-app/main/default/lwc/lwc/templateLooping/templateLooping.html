@@ -2,17 +2,20 @@
     <lightning-card title="Template Looping">
         <div class="slds-var-m-around_medium">
             <template for:each={strList} for:item="str" for:index="indx">
-                <div key={str}> {str} {indx} </div> 
+                <div key={str}> {str} {indx}</div> 
             </template>
         </div>
         <br/>
         <div class="slds-var-m-around_medium">
-            <template for:each={students} for:item="student">
-                <div key={student.name}>
+            <template for:each={students} for:item="student" for:index="ix">
+                <div key={student.rollNumber}>
                 Student Name : {student.name}
                 Roll Number : {student.rollNumber}
+                index: {ix}
                 </div>
             </template>
         </div>
+
+
     </lightning-card>
 </template>

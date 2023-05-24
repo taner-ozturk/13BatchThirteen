@@ -19,7 +19,6 @@ export default class DeleteRecord_Contact extends LightningElement {
                 variant: 'success'
             });
             this.dispatchEvent(event);
-            this.resetHandler;
         })
         .catch(error=>{
             const event = new ShowToastEvent({

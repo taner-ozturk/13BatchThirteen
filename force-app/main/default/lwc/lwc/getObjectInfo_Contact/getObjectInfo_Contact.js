@@ -6,23 +6,16 @@ import CONTACT_OBJ from '@salesforce/schema/Contact';
 
 export default class GetObjectInfo_Contact extends LightningElement {
 
-    //return data, error
-    /*
-    {
-        data : ....
-        error : ...
-    }*/
-
     recordTypeIdContact;
 
     @wire(getObjectInfo,{objectApiName: CONTACT_OBJ})
     contactHandler({data,error}){
         if(data){
-            console.log(data);
+            console.log('contact metadatası: ',data);
             this.recordTypeIdContact = data.defaultRecordTypeId;
         }
         if(error){
-            console.log(error);
+            console.log('contact error: ',error);
         }
     }
 }

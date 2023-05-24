@@ -23,7 +23,7 @@ export default class LightningRecordEditForm_Contact extends LightningElement {
     Email : EMAIL_FIELD,
     Phone : PHONE_FIELD
  };
- recordId = "0035i00000SQVmoAAH";
+ recordId = "003Dn00000MAwuvIAD";
 
  successHandler(){
     const event = new ShowToastEvent({

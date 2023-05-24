@@ -1,24 +1,17 @@
 <template>
     <lightning-card title="Imperative Calculator">
         <div class="slds-var-m-around_medium">
-          <lightning-input label="Input 1"  onchange={firstHandler} value={a}></lightning-input>      
-          <lightning-input label="Input 2"  onchange={secondHandler} value={b}></lightning-input> 
-          <br/>
-          <template if:true={wireSum}>
-            <div>Wire Sum Result is {wireSum}</div>
-          </template> 
-
+          <lightning-input label="Input 1" type="number" onchange={firstHandler}></lightning-input>      
+          <lightning-input label="Input 2" type="number" onchange={secondHandler}></lightning-input> 
           <div class="slds-align_absolute-center slds-var-m-top_small">
-            <lightning-button label="Add" variant="Brand"  onclick={calcHandler} name="Add"></lightning-button>
-            <lightning-button label="Sub" variant="Brand" class="slds-var-m-left_x-small"  onclick={calcHandler} name="Sub"></lightning-button>
-            <lightning-button label="Multiply" variant="Brand" class="slds-var-m-left_x-small"  onclick={calcHandler} name="Multiply"></lightning-button>
-            <lightning-button label="Divide" variant="Brand" class="slds-var-m-left_x-small"  onclick={calcHandler} name="Divide"></lightning-button>
+            <lightning-button label="Add" variant="Brand" name="Add" onclick={calcHandler}></lightning-button>
+            <lightning-button label="Sub" variant="Brand" class="slds-var-m-left_x-small" name="Sub" onclick={calcHandler}></lightning-button>
+            <lightning-button label="Multiply" variant="Brand" class="slds-var-m-left_x-small" name="Multiply" onclick={calcHandler}></lightning-button>
+            <lightning-button label="Divide" variant="Brand" class="slds-var-m-left_x-small" name="Divide" onclick={calcHandler}></lightning-button>
           </div>
-
-        <template lwc:if={imperativeResult}>
+          <template lwc:if={imperativeResult}>
             <div>Imperative Result is {imperativeResult}</div>
-        </template>
-       
+          </template>
         </div>
     </lightning-card>
 </template>

@@ -6,7 +6,7 @@ import { getObjectInfo} from 'lightning/uiObjectInfoApi';
 
 //Import Field
 import STATUS_FIELD from '@salesforce/schema/Case.Status';
-import LEVEL_FIELD from '@salesforce/schema/Airline__c.Level__c';
+import LEVEL_FIELD from '@salesforce/schema/Airline__c.level__c';
 
 import PRIORITY_FIELD from '@salesforce/schema/Case.Priority';
 

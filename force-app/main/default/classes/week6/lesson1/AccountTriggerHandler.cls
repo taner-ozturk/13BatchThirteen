@@ -56,7 +56,7 @@ public class AccountTriggerHandler {
         //IF no account's VIP field is changed, then NO need to do any SOQl or any update.
         if(!accIds.isEmpty()){
             //get all contacts of all the account where VIP is changed
-            list<contact> getContacts = [select id, vip__c, accountid from Contact where accountId in :accIds];// =    = :   LİKE 
+            list<contact> getContacts = [select id, vip__c, accountid from Contact where accountId in :accIds];
             for (contact eachContact : getContacts) {
                 id accId = eachContact.AccountId;
                 //get new account from Trigger.newMap  using .get(key) method

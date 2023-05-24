@@ -8,11 +8,12 @@
             record-id={recordId}
             object-api-name={objName}>
             <lightning-input-field field-name={fields.Subject}></lightning-input-field>
-            <lightning-input-field field-name={fields.Status}></lightning-input-field>
+            <strong><lightning-input-field field-name={fields.Status}></lightning-input-field></strong>
             <lightning-input-field field-name={fields.CaseOrigin}></lightning-input-field>
             <div class="slds-align_absolute-center">
-                <lightning-button label="Cancel" type="reset" variant="neutral" class="slds-var-m-right_x-small"></lightning-button>
-                <lightning-button label="Save" type="submit" variant="brand"></lightning-button>
+
+                <lightning-button label="Cancel" type="reset" variant="brand" class="slds-var-m-right_x-small"></lightning-button>
+                <lightning-button label="Save" type="submit" variant="destructive"></lightning-button>
             </div>        
             </lightning-record-edit-form>
         </div>
@@ -24,7 +25,7 @@
             object-api-name={objName}
             record-id={recordId}>
             <lightning-output-field field-name={fields.Subject}></lightning-output-field>
-            <lightning-output-field field-name={fields.Status}></lightning-output-field>
+            <strong><lightning-output-field field-name={fields.Status}></lightning-output-field></strong>
             <lightning-output-field field-name={fields.CaseOrigin}></lightning-output-field>        
             </lightning-record-view-form>
 

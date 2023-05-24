@@ -10,7 +10,6 @@ export default class GetPicklistValuesByRecordType_Account extends LightningElem
     //Get default record type Id using getObjectInfo
     @wire(getObjectInfo, {objectApiName:ACCOUNT_OBJECT})
     objectInfo;
-
     /*
     objectInfo = {
         data : {}
@@ -21,14 +20,12 @@ export default class GetPicklistValuesByRecordType_Account extends LightningElem
         this.defAccRtId = data.defaultRecordTypeId
     }
     */
-
-    
-
     ratingOptions;
     @wire(getPicklistValuesByRecordType,{objectApiName : ACCOUNT_OBJECT,recordTypeId :'$objectInfo.data.defaultRecordTypeId'})
     ratingHandler({data,error}){
+        console.log('objectInfo:',this.objectInfo);
         if(data){
-            console.log(data);
+            console.log('Account objecti piclistleri recordtye a göre:',data);
             /**
              data = {
                 picklistFieldValues : {

@@ -17,16 +17,18 @@ import ANNUALREVENUE_FIELD from '@salesforce/schema/Account.AnnualRevenue';
 export default class LightningRecordForm_Account extends LightningElement {
 
     objName = ACCOUNT_OBJ;
-    recordId = '0015i00000ftM7PAAU';
+    recordId = '001Dn00000QEXXXIA5';
     fields = [ACCNAME_FIELD,RATING_FIELD,ACCNUM_FIELD,PHONE_FIELD,WEBSITE_FIELD,INDUSTRY_FIELD,TYPE_FIELD,ANNUALREVENUE_FIELD];
 
     successHandler(){
+    
         const event = new ShowToastEvent({
             title: "Success",
             message: "Record saved successfully",
             variant : "Success"
         });
         this.dispatchEvent(event);
+
     }
 
     errorHandler(){
@@ -37,4 +39,5 @@ export default class LightningRecordForm_Account extends LightningElement {
         });
         this.dispatchEvent(event);
     }
+
 }

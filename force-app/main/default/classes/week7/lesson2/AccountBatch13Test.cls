@@ -1,5 +1,5 @@
 @isTEst
-public class AccountBatch13Test {
+public with sharing class AccountBatch13Test {
     @isTest
     public static void testBatch1() {
         //1. Data preparation.
@@ -21,6 +21,9 @@ public class AccountBatch13Test {
         Test.stopTest();
 
         //3. assertion
-
+        List<account> allAccounts = [select description from account];
+        for (account ac : allaccounts) {
+            assert.isTrue(ac.Description.containsIgnoreCase('batch'));
+        }
     }
 }

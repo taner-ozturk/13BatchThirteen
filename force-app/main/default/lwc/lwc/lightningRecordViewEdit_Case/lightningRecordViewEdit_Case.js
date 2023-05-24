@@ -17,6 +17,6 @@ fields ={
     CaseOrigin : CASEORIGIN_FIELD
 };
 //Case Object Record Id
-recordId = '5005i00000SATUJAA5';
+recordId = '500Dn000007b27fIAA';
 
 }

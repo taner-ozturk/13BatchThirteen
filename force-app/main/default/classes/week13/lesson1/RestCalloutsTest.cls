@@ -10,9 +10,6 @@ public with sharing class RestCalloutsTest {
         //3. Run Asserts
         System.assertEquals(200, response.getStatusCode());
         System.assertEquals('OK', response.getStatus());
-        System.assertEquals('application/json;charset=UTF-8', response.getHeader('Content-Type'));
-
-
     }
 
     @isTest

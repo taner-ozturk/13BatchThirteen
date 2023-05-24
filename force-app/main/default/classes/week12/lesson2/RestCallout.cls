@@ -5,15 +5,15 @@ public with sharing class RestCallout {
     public static HttpResponse getAnimal(){
         // 1.Prepare HttpRequest and wrap all the necessary data in it.
         HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:Heroku_App/animals');
+        request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
         request.setMethod('GET');
-
-        // String username = 'ozhan@test.com';
-        // String password = 'Test1234';
-        // Blob requestBlob = Blob.valueOf(username + ':' + password);
-        // String authorizationString = 'BASIC' + EncodingUtil.base64Encode(requestBlob);
-        // request.setHeader('Authorization', authorizationString);
-
+/*
+        String username = 'ozhan@test.com';
+        String password = 'Test1234';
+        Blob requestBlob = Blob.valueOf(username + ':' + password);
+        String authorizationString = 'BASIC' + EncodingUtil.base64Encode(requestBlob);
+        request.setHeader('Authorization', authorizationString);
+*/
         // 2. Prepare Internet
         Http http = new Http();
 
@@ -22,8 +22,9 @@ public with sharing class RestCallout {
 
         // 4. Process HttpResponse
         System.debug(response.getStatusCode());
+        System.debug(response.getStatus());
+        System.debug(response.getHeader('Content-Type'));
         System.debug(response.getBody());
-
         return response;
     }
 
@@ -65,7 +66,6 @@ public with sharing class RestCallout {
        HttpResponse response = http.send(request);
        
        // 4. Process HttpResponse
-       System.debug(response);
 
        if(response.getStatusCode() == 200){
             String jsonString = response.getBody();
@@ -91,14 +91,12 @@ public with sharing class RestCallout {
                 employees.add(emp);
             }
 
-
             try{
                 insert employees;
             }catch(Exception ex){
                 System.debug(ex.getMessage());
             }
        }
-
        return response;
     }
 
@@ -111,7 +109,7 @@ public with sharing class RestCallout {
         request.setHeader('Content-Type', 'application/json');
 
         EmployeeResponse.EmployeeWrapper ew = new EmployeeResponse.EmployeeWrapper();
-        ew.name = 'Taner Smith';
+        ew.name = 'John Smith';
         ew.username = 'blackhead';
         ew.email = 'js@gmail.com';
         ew.gender = 'Male';
@@ -134,9 +132,9 @@ public with sharing class RestCallout {
         System.debug(response.getStatusCode());
         if(response.getStatusCode() == 200){
             String jsonString = response.getBody();
+            System.debug(jsonString);
 
             EmployeePostResponse epr = (EmployeePostResponse) JSON.deserialize(jsonString, EmployeePostResponse.class);
-        
             System.debug(epr) ; 
             System.debug('Name : ' + epr.data.name); 
             System.debug('Username : ' + epr.data.username); 
@@ -154,23 +152,22 @@ public with sharing class RestCallout {
 
     public static HttpResponse deleteEmployee(){
         HttpRequest request = new HttpRequest();
-        request.setEndpoint('https://api.onlinewebtutorblog.com/employees/105');
+        request.setEndpoint('https://api.onlinewebtutorblog.com/employees/1');
         request.setMethod('DELETE');
 
         Http http = new Http();
 
         HttpResponse response = http.send(request);
 
-
         if(response.getStatusCode() == 200){
             String jsonString = response.getBody();
+            System.debug(jsonString);
 
             EmployeeResponse emr = (EmployeeResponse) JSON.deserialize(jsonString, EmployeeResponse.class);
 
             System.debug(emr.msg);
-        }else if (response.getStatusCode() == 404) {
-            System.debug('Merhaba Türkçeciler :)');
         }
+
         return response;
     }
 }

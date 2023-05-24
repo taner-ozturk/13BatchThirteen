@@ -1,18 +1,44 @@
 public class SPTriggerHandler {
     public static void createDefaultTickdt(list<salesforce_project__c> spTriggerNew) {
-         List<Salesforce_Ticket__c> newTickets = new List<Salesforce_Ticket__c>();
-         for (Salesforce_Project__c eachSP : spTriggerNew) {
-             //create new ticket here
-             Salesforce_Ticket__c st = new Salesforce_Ticket__c();
-             st.Subject__c = 'Default ST';
-             st.Salesforce_Project__c = eachSP.id;
-             st.Requested_by_date__c = date.today();
-             newTickets.add(st);
-         }
-         if (!newTickets.isEmpty()) {
-             insert newTickets;
-         }
-    }
+        try {
+            //to get Orgs default value we use .getOrgDefaults method
+            //to get USER specific or Profile specific value we can use .getInstance() method
+            //DefaultTicketInfo__c dtInfo = defaultTicketInfo__c.getOrgDefaults();
+            DefaultTicketInfo__c dtInfo;
+
+            Profile adminProfile = [SELECT id, name FROM profile WHERE Name = 'System Administrator' limit 1 ];
+
+            if(UserInfo.getProfileId() == adminProfile.Id){
+                dtInfo = defaultTicketInfo__c.getInstance(adminProfile.Id);
+            }else {
+                dtInfo = defaultTicketInfo__c.getOrgDefaults();
+            }
+            
+            //
+            List<Salesforce_Ticket__c> newTickets = new List<Salesforce_Ticket__c>();
+            for (Salesforce_Project__c eachSP : spTriggerNew) {
+                //create new ticket here
+                Salesforce_Ticket__c st = new Salesforce_Ticket__c();
+                st.Subject__c = 'Default ST';
+                st.Subject__c = dtInfo.Subject__c;
+                st.Salesforce_Project__c = eachSP.id;
+                st.Requested_by_date__c = date.today();
+                st.Priority__c = 'High';
+                st.Description__c = dtInfo.description__c;
+                newTickets.add(st);
+            }
+            if (!newTickets.isEmpty()) {
+                insert newTickets;
+            }
+        } catch (Exception ex) {
+            string errorMsg = system.label.CreateDefaultTicketError;
+            //string errorMsg = system.label.CreateDefaultTicketError;
+            for (Salesforce_Project__c eachSP : spTriggerNew) {
+                eachSP.addError(errorMsg);
+                eachSP.addError('Error in creating ticket. Please contact your administrator, not developer');
+            }
+        }
+   }
  
     public static void validateProjectCompletion(List<Salesforce_Project__c> spTriggerNew, 
      List<Salesforce_Project__c> spTriggerOld, Map<id, Salesforce_Project__c> spTriggerNewMap, 
@@ -58,7 +84,9 @@ public class SPTriggerHandler {
     //METHOD1 (normal method)
     //get set<id> of project for which status is changed to completed.
     //call method2(setId)
-    public static void projectStatusChange(List<Salesforce_Project__c> spTriggerNew, List<Salesforce_Project__c> spTriggerOld, Map<id, Salesforce_Project__c> spTriggerNewMap,  Map<id, Salesforce_Project__c> spTriggerOldMap) {
+    public static void projectStatusChange(List<Salesforce_Project__c> spTriggerNew, 
+    List<Salesforce_Project__c> spTriggerOld, Map<id, Salesforce_Project__c> spTriggerNewMap, 
+    Map<id, Salesforce_Project__c> spTriggerOldMap) {
       set<id> spIds = new set<id>();
       for (Salesforce_Project__c sp : spTriggerNew) {
          //check if status is changed to completed
@@ -76,6 +104,7 @@ public class SPTriggerHandler {
     //Method2 (future method)
     //get all tickets of setId project ids
     //update status to compelted.
+    @testVisible
     @future
     private static void updateTicketStatus(set<id> spIds) {
          //update all tickets

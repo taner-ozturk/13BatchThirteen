@@ -20,6 +20,6 @@ export default class LightningRecordViewForm_Opportunity extends LightningElemen
         AccountName : ACCNAME_FIELD
     };
 
-    recordId = '0065i00000DtzOJAAZ';
+    recordId = '006Dn000008vJ13IAE';
     objName = OPP_OBJ;
 }

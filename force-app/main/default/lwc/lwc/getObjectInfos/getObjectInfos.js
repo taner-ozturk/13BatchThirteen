@@ -13,14 +13,12 @@ export default class GetObjectInfos extends LightningElement {
 @wire(getObjectInfos,{objectApiNames : [LEAD_OBJ,OPP_OBJ]})
 objHandler({data,error}){
     if(data){
-        console.log(data);
+        console.log('getobjectinfos datası :',data);
         this.leadRTId = data.results[0].result.defaultRecordTypeId;
         this.oppRTId = data.results[1].result.defaultRecordTypeId;
     }
     if(error){
-        console.log(error);
+        console.log('getobjectinfos error :',error);
     }
 }
-
-
 }

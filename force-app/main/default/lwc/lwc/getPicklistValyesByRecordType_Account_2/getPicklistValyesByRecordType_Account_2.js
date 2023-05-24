@@ -11,10 +11,11 @@ individualRtId;
 @wire(getObjectInfo,{objectApiName : ACCOUNT_OBJECT})
 objectHandler({data,error}){
     if(data){
-        console.log(data);
+        console.log('getobjectInfo account :', data);
         //To find the respective record Type Id
         const rtIds = data.recordTypeInfos;
-        this.individualRtId = Object.keys(rtIds).find(rtId=>rtIds[rtId].name=='Individual');
+        console.log('rtIds',rtIds);
+        this.individualRtId = Object.keys(rtIds).find(mahmut=>rtIds[mahmut].name=='Individual');
     }
     
 }   

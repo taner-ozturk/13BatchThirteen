@@ -23,5 +23,3 @@ public class PrimitiveDataTypeDemo {
         system.debug('id is ' + conId);
     } 
 }
-
-

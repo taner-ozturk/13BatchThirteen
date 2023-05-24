@@ -6,28 +6,33 @@ import { getObjectInfo} from 'lightning/uiObjectInfoApi';
 
 //Import Field
 import STATUS_FIELD from '@salesforce/schema/Case.Status';
+import LEVEL_FIELD from '@salesforce/schema/Airline__c.level__c';
+
 import PRIORITY_FIELD from '@salesforce/schema/Case.Priority';
 
 //Import Object
 import CASE_OBJ from '@salesforce/schema/Case';
+import ACC_OBJ from '@salesforce/schema/Account';
+
 
 export default class GetPicklistValues_Case extends LightningElement {
 
     statusOptions;
     priorityOptions;
-    defCaseRTId;
+    defaccRTId;
 
-    @wire(getObjectInfo,{objectApiName : CASE_OBJ})
+    @wire(getObjectInfo,{objectApiName : ACC_OBJ})
     caseHandler({data,error}){
         if(data){
-            this.defCaseRTId = data.defaultRecordTypeId;
+            this.defaccRTId = data.defaultRecordTypeId;
+            console.log('case default record typeId:',this.defCaseRTId);
         }
     }
 
-    @wire(getPicklistValues,{fieldApiName : STATUS_FIELD, recordTypeId : '$defCaseRTId'})
+    @wire(getPicklistValues,{fieldApiName : LEVEL_FIELD, recordTypeId : '$defaccRTId'})
     caseStatusHandler({data,error}){
         if(data){
-            console.log(data);
+            console.log('getPiclistValues: ',data);
             this.statusOptions = data.values;  
             //New : Fresh
             //In Progress : Doing
@@ -38,7 +43,7 @@ export default class GetPicklistValues_Case extends LightningElement {
         }
     }
 
-    @wire(getPicklistValues,{fieldApiName : PRIORITY_FIELD, recordTypeId : '$defCaseRTId'})
+    @wire(getPicklistValues,{fieldApiName : PRIORITY_FIELD, recordTypeId : '$defaccRTId'})
     casePriorityHandler({data,error}){
         if(data){
             this.priorityOptions = data.values;
