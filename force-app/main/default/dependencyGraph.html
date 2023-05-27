@@ -1,17 +1,22 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"></head>
-<body><h2>LWCs Dependency Graph for /Users/Taner/Pictures/13BatchThirteen/force-app/main/default<br>Dependencies for p2cActionAtParent2 LWC<br><br>Number of Dependencies: 1</h2>
+<body><h2>LWCs Dependency Graph for /Users/Taner/Pictures/13BatchThirteen/force-app/main/default<br>Dependencies for lds LWC<br><br>Number of Dependencies: 2</h2>
 <div id="theGraph" class="mermaid">
 
 graph LR
-p2cActionAtParent2-LWC(p2cActionAtParent2 LWC) --> p2cDisplayContactsChild-LWC(p2cDisplayContactsChild LWC)
-p2cDisplayContactsChild-LWC(p2cDisplayContactsChild LWC)
-independentItems(ITEMS WITH NO DEPENDENCIES:<br><br>p2cDisplayContactsChild LWC)
+errorPanel-LWC(errorPanel LWC)
+ContactController-CLASS(ContactController CLASS)
+lds-LWC(lds LWC) --> errorPanel-LWC(errorPanel LWC)
+lds-LWC(lds LWC) --> ContactController-CLASS(ContactController CLASS<br><br>importedgetContactList<br>importedfindContacts<br>importedgetSingleContact<br>importedgetContacts<br>importedsearchContacts<br>importedupdateContact<br>importedsearchContactsWire)
+independentItems(ITEMS WITH NO DEPENDENCIES:<br><br>errorPanel LWC<br>ContactController CLASS)
 
 classDef LWC fill:lightgreen,stroke-width:4px;
-class p2cActionAtParent2-LWC,p2cDisplayContactsChild-LWC LWC
+class errorPanel-LWC,lds-LWC LWC
 
-classDef p2cActionAtParent2Item stroke:red,stroke-width:8px;
-class p2cActionAtParent2-LWC p2cActionAtParent2Item
+classDef CLASS fill:lightblue,stroke-width:4px;
+class ContactController-CLASS CLASS
+
+classDef ldsItem stroke:red,stroke-width:8px;
+class lds-LWC ldsItem
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>

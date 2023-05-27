@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Process CSV File">
+        <div style="margin-left:4%; margin:0px auto; width: 300px;">
+            <lightning-file-upload accept={acceptedCSVFormats}                                   
+                                   name="fileUploader"
+                                   onuploadfinished={handleUploadFinished} 
+                                   record-id={recordId}></lightning-file-upload>
+        </div><br/>
+        <div if:true={error}>
+            {error}
+        </div><br/>
+
+    </lightning-card>
+</template>
